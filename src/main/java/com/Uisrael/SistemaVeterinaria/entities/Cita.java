@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -34,6 +35,9 @@ public class Cita {
     @ManyToOne
     @JoinColumn(name = "veterinario_id", foreignKey = @ForeignKey(name = "FK_cita_veterinario_id"))
     private Veterinario veterinario;
+
+    @OneToMany(mappedBy = "cita", cascade = CascadeType.ALL)
+    private List<CitaServicio> citaServicios;  // Relación con la tabla intermedia CitaServicio
 
     public enum EstadoCita {
         ACTIVO, INACTIVO
