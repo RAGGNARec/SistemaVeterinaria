@@ -26,7 +26,7 @@ public class Cita {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private EstadoCita estado = EstadoCita.ACTIVO;
+    private EstadoCita estado = EstadoCita.PENDIENTE; // Por defecto, PENDIENTE
 
     @ManyToOne
     @JoinColumn(name = "mascota_id", foreignKey = @ForeignKey(name = "FK_cita_mascota_id"))
@@ -40,6 +40,6 @@ public class Cita {
     private List<CitaServicio> citaServicios;  // Relación con la tabla intermedia CitaServicio
 
     public enum EstadoCita {
-        ACTIVO, INACTIVO
+        PENDIENTE, COMPLETADA, CANCELADA
     }
 }

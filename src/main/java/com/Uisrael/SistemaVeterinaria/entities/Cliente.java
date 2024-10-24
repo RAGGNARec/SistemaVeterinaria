@@ -35,10 +35,6 @@ public class Cliente {
     @Column(nullable = false)
     private EstadoCliente estado = EstadoCliente.ACTIVO;
 
-    @OneToOne
-    @JoinColumn(name = "usuario_id", foreignKey = @ForeignKey(name = "FK_cliente_usuario_id"))
-    private Usuario usuario;
-
     public enum EstadoCliente {
         ACTIVO, INACTIVO
     }

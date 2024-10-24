@@ -1,0 +1,85 @@
+<div th:fragment="Menu">
+<div class="br-logo">
+  <a href="">
+    <img src="https://veterinarioatizapan.com/wp-content/uploads/2024/07/logo-1024x330.png"
+         alt="logo cemlad" width="100%">
+  </a>
+</div>
+<div class="br-sideleft overflow-y-auto">
+  <label class="sidebar-label pd-x-15 mg-t-20">MENU</label>
+  <div class="br-sideleft-menu">
+    <a href="#" class="br-menu-link" th:href="@{/Inicio}">
+      <div class="br-menu-item">
+        <i class="menu-item-icon icon fa fa-home tx-22"></i>
+        <span class="menu-item-label">Escritorio</span>
+      </div><!-- menu-item -->
+    </a>
+    <a href="#" class="br-menu-link">
+      <div class="br-menu-item">
+        <i class="menu-item-icon fa fa-paw tx-22"></i>
+        <span class="menu-item-label">Mascotas</span>
+        <i class="menu-item-arrow fa fa-angle-down"></i>
+      </div><!-- menu-item -->
+    </a>
+    <ul class="br-menu-sub nav flex-column">
+      <li class="nav-item"><a href="#" class="nav-link" th:href="@{/Mascota}">Listar</a></li>
+      <li class="nav-item"><a href="#" class="nav-link" th:href="@{/Mascota/nuevo}">Ingresar</a></li>
+    </ul>
+    <a href="#" class="br-menu-link">
+      <div class="br-menu-item">
+        <i class="menu-item-icon icon ion-person-add tx-22"></i>
+        <span class="menu-item-label">Cliente</span>
+        <i class="menu-item-arrow fa fa-angle-down"></i>
+      </div><!-- menu-item -->
+    </a>
+    <ul class="br-menu-sub nav flex-column">
+      <li class="nav-item"><a href="#" class="nav-link" th:href="@{/Cliente}">Listar</a></li>
+      <li class="nav-item"><a href="#" class="nav-link" th:href="@{/Cliente/nuevo}">Ingresar</a></li>
+    </ul>
+    <a href="#" class="br-menu-link">
+      <div class="br-menu-item">
+        <i class="menu-item-icon icon ion-medkit tx-28"></i>
+        <span class="menu-item-label">Veterinario</span>
+      </div><!-- menu-item -->
+    </a>
+    <a href="#" class="br-menu-link">
+      <div class="br-menu-item">
+        <i class="menu-item-icon fa fa-calendar tx-22"></i>
+        <span class="menu-item-label">Citas</span>
+      </div><!-- menu-item -->
+    </a>
+    <a href="#" class="br-menu-link">
+      <div class="br-menu-item">
+        <i class="menu-item-icon fa fa-book tx-22"></i>
+        <span class="menu-item-label">Historial Clinico</span>
+      </div><!-- menu-item -->
+    </a>
+    <a href="#" class="br-menu-link">
+      <div class="br-menu-item">
+        <i class="menu-item-icon fa fa-briefcase tx-22"></i>
+        <span class="menu-item-label">Servicios</span>
+      </div><!-- menu-item -->
+    </a>
+    <a href="#" class="br-menu-link">
+      <div class="br-menu-item">
+        <i class="menu-item-icon fa fa-users tx-20"></i>
+        <span class="menu-item-label">Usuarios</span>
+        <i class="menu-item-arrow fa fa-angle-down"></i>
+      </div><!-- menu-item -->
+    </a>
+    <ul class="br-menu-sub nav flex-column">
+      <li class="nav-item"><a href="#" class="nav-link">Rol</a></li>
+      <li class="nav-item"><a href="#" class="nav-link">Ingresar</a></li>
+    </ul>
+    <a href="#" class="br-menu-link">
+      <div class="br-menu-item">
+        <i class="menu-item-icon icon ion-power tx-20"></i>
+        <span class="menu-item-label">Salir</span>
+      </div><!-- menu-item -->
+    </a>
+  </div>
+  <br>
+</div>
+</div>
+
+

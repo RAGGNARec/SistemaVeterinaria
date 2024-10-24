@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="~{fragments/Head :: Head}"></head>
+
+<body style="background-image: url('/img/veterinariaFondo.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; position: relative;">
+
+<!-- Capa oscura -->
+
+<div th:replace="~{fragments/Menu::Menu}"></div>
+<div th:replace="~{fragments/Header::Header}"></div>
+<div th:replace="~{fragments/PanelLateral::PanelLateral}"></div>
+
+
+<!--CONTENIDO-->
+
+<div class="br-mainpanel" >
+
+    <div class=" shadow-base bd-0 rounded-0 widget-4">
+        <div class="card-body" style="background-color: #1d29398c;">
+            <h4 class="tx-normal tx-roboto tx-white">Bienvenido sistema de veterinaria</h4>
+            <p class="mg-b-25 tx-roboto tx-white">Uisrael - Desarrollo de software</p>
+            <p class="tx-20 wd-md-500 mg-md-l-auto mg-md-r-auto mg-b-25 tx-white">Dashboard General Veterinaria</p>
+        </div>
+    </div>
+    <div class="br-pagebody pd-x-20 pd-sm-x-30">
+        <div class="row row-sm">
+            <div class="col-sm-6 col-xl-3  mg-xl-t-0 mb-2">
+                <div class="bg-primary rounded overflow-hidden">
+                    <div class="pd-20 d-flex align-items-center">
+                        <i class="fa fa-users tx-60 lh-0 tx-white "></i>
+                        <div class="mg-l-20">
+                            <p class="tx-12 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">
+                                TOTAL CLIENTES</p>
+                            <div class="row d-flex">
+                                <div class="col-6">
+                                    <p class="tx-40 tx-white tx-lato tx-bold mg-b-2 lh-1" id="lblTotal">10</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-xl-3 mg-xl-t-0 mb-2">
+                <div class="bg-purple  rounded overflow-hidden">
+                    <div class="pd-20 d-flex align-items-center">
+                        <i class="fa fa-paw tx-60 lh-0 tx-white "></i>
+                        <div class="mg-l-20">
+                            <p class="tx-12 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">
+                                TOTAL MASCOTAS</p>
+                            <div class="row d-flex">
+                                <div class="col-6">
+                                    <p class="tx-40 tx-white tx-lato tx-bold mg-b-2 lh-1" id="totalProveedores">12</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- col-3 -->
+            <div class="col-sm-6 col-xl-3 mg-xl-t-0 mb-2">
+                <div class="bg-danger  rounded overflow-hidden">
+                    <div class="pd-20 d-flex align-items-center">
+                        <i class="icon ion-medkit tx-60 lh-0 tx-white "></i>
+                        <div class="mg-l-20">
+                            <p class="tx-12 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">
+                                Historial Clinico
+                            </p>
+                            <div class="row d-flex">
+                                <div class="col-6">
+                                    <p class="tx-40 tx-white tx-lato tx-bold mg-b-2 lh-1">20</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-xl-3 mg-xl-t-0 mb-2">
+                <div class="bg-warning  rounded overflow-hidden">
+                    <div class="pd-20 d-flex align-items-center">
+                        <i class="fa fa-briefcase tx-60 lh-0 tx-white "></i>
+                        <div class="mg-l-20">
+                            <p class="tx-12 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">
+                                SERVICIOS
+                            </p>
+                            <div class="row d-flex">
+                                <div class="col-6">
+                                    <p class="tx-40 tx-white tx-lato tx-bold mg-b-2 lh-1">10</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--FIN DE CONTENIDO-->
+
+    <footer class="br-footer" style="padding-top: 175px;">
+        <div class="footer-left" style="color: white;">
+            <div class="mg-b-2">Copyright © 2024 Uisrael Sistema Veterinaria </div>
+            <div>Si lo puedes imaginar lo puedes crear</div>
+        </div>
+    </footer>
+</div>
+
+
+<script src="../../lib/jquery/jquery.js"></script>
+<script src="../../lib/popper.js/popper.js"></script>
+<script src="../../lib/bootstrap/bootstrap.js"></script>
+<script src="../../lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script>
+<script src="../../lib/moment/moment.js"></script>
+<script src="../../lib/jquery-ui/jquery-ui.js"></script>
+<script src="../../lib/jquery-switchbutton/jquery.switchButton.js"></script>
+<script src="../../lib/peity/jquery.peity.js"></script>
+<script src="../../js/bracket.js"></script>
+<script src="../../lib/morris.js/morris.js"></script>
+<script src="../../lib/highlightjs/highlight.pack.js"></script>
+<script src="../../lib/raphael/raphael.min.js"></script>
+<script src="../../lib/js/chart.morris.js"></script>
+<script src="../../lib/datatables/jquery.dataTables.js"></script>
+<script src="../../lib/datatables-responsive/dataTables.responsive.js"></script>
+<script src="../../datatables/dataTables.buttons.min.js"></script>
+<script src="../../datatables/buttons.html5.min.js"></script>
+<script src="../../datatables/buttons.colVis.min.js"></script>
+<script src="../../datatables/jszip.min.js"></script>
+<script src="../../lib/select2/js/select2.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="../../datatables/pdfmake.min.js"></script>
+<script src="../../datatables/vfs_fonts.js"></script>
+</body>
+</html>
