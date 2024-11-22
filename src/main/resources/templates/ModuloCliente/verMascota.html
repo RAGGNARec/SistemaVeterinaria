@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="~{fragments/Head :: Head}"></head>
+<body>
+<div th:replace="~{fragments/Header::Header}"></div>
+
+<div th:fragment="Menu">
+    <div class="br-logo">
+        <a href="" th:href="@{/cliente}">
+            <img src="https://veterinarioatizapan.com/wp-content/uploads/2024/07/logo-1024x330.png" alt="logo cemlad" width="100%">
+        </a>
+    </div>
+    <div class="br-sideleft overflow-y-auto">
+        <label class="sidebar-label pd-x-15 mg-t-20">MENU</label>
+        <div class="br-sideleft-menu">
+            <a href="#" class="br-menu-link" th:href="@{/cliente}">
+                <div class="br-menu-item">
+                    <i class="menu-item-icon icon fa fa-home tx-22"></i>
+                    <span class="menu-item-label">Dashboard Cliente</span>
+                </div><!-- menu-item -->
+            </a>
+            <form id="logoutForm" th:action="@{/logout}" method="post" style="display: none;">
+                <!-- Formulario oculto pero será enviado al hacer clic en el enlace -->
+            </form>
+            <a href="#" class="br-menu-link" onclick="document.getElementById('logoutForm').submit();">
+                <div class="br-menu-item">
+                    <i class="menu-item-icon icon ion-power tx-20"></i>
+                    <span class="menu-item-label">Salir</span>
+                </div><!-- menu-item -->
+            </a>
+        </div>
+        <br>
+    </div>
+</div>
+
+<!-- INICIO DE CONTENIDO -->
+
+
+<div class="br-mainpanel">
+    <div class="br-pageheader pd-y-5 pd-l-20">
+        <nav class="breadcrumb pd-0 mg-0 tx-12">
+            <a class="breadcrumb-item" th:href="@{/cliente}">Inicio</a>
+        </nav>
+    </div>
+    <div class="br-pagebody mg-t-5 pd-x-30">
+        <div class="row row-sm mg-t-20">
+            <div class="col-12">
+                <div class="br-section-wrapper p-3">
+                    <div class="card pd-20 pd-xs-30 shadow-base bd-0 mb-4">
+
+                        <h3 class="box-title tx-20 tx-bold tx-center tx-uppercase" style="color: #1d2939;">
+                            Historial Clínico de <span th:text="${mascota.nombre}"></span></h3>
+
+                        <!-- Información básica de la mascota -->
+                        <div class="card-body">
+                            <p class="tx-13 tx-bold tx-uppercase" style="color: #343a40;">
+                                Información de la Mascota</p>
+                            <div class="row">
+                                <div class="form-group col-lg-3 col-md-6 col-sm-6 col-xs-12" style="border: 1px solid #00000030;">
+                                    <label class="tx-12 tx-uppercase tx-mont tx-medium tx-spacing-1 mg-b-2"><strong>Nombre</strong></label>
+                                    <p class="tx-info tx-12 " th:text="${mascota.nombre}"></p>
+                                </div>
+                                <div class="form-group col-lg-3 col-md-6 col-sm-6 col-xs-12" style="border: 1px solid #00000030;">
+                                    <label class="tx-12 tx-uppercase tx-mont tx-medium tx-spacing-1 mg-b-2"><strong>Especie</strong></label>
+                                    <p class="tx-info tx-12 " th:text="${mascota.raza.especie.nombre}"></p>
+                                </div>
+                                <div class="form-group col-lg-3 col-md-6 col-sm-6 col-xs-12" style="border: 1px solid #00000030;">
+                                    <label class="tx-12 tx-uppercase tx-mont tx-medium tx-spacing-1 mg-b-2"><strong>Raza</strong></label>
+                                    <p class="tx-info tx-12 " th:text="${mascota.raza.nombre}"></p>
+                                </div>
+                                <div class="form-group col-lg-3 col-md-6 col-sm-6 col-xs-12" style="border: 1px solid #00000030;">
+                                    <label class="tx-12 tx-uppercase tx-mont tx-medium tx-spacing-1 mg-b-2"><strong>Edad</strong></label>
+                                    <p class="tx-info tx-12 " th:text="${mascota.edad}"></p>
+                                </div>
+                                <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12" style="border: 1px solid #00000030;">
+                                    <label class="tx-12 tx-uppercase tx-mont tx-medium tx-spacing-1 mg-b-2"><strong>Sexo</strong></label>
+                                    <p class="tx-info tx-12 " th:text="${mascota.sexo}"></p>
+                                </div>
+                                <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12" style="border: 1px solid #00000030;">
+                                    <label class="tx-12 tx-uppercase tx-mont tx-medium tx-spacing-1 mg-b-2"><strong>Fecha nacimiento</strong></label>
+                                    <p class="tx-info tx-12 " th:text="${mascota.fechaNacimiento}"></p>
+                                </div>
+                                <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12" style="border: 1px solid #00000030;">
+                                    <label class="tx-12 tx-uppercase tx-mont tx-medium tx-spacing-1 mg-b-2"><strong>Peso kg</strong></label>
+                                    <p class="tx-info tx-12 " th:text="${mascota.peso}"></p>
+                                </div>
+                                <hr>
+                                <div class="form-group col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                                    <a href="/cliente" class="btn btn-outline-primary btn-block" style="cursor: pointer;">
+                                        <i class="icon ion-arrow-left-a mg-r-10"></i> REGRESAR
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Tabla del historial clínico -->
+                        <div class="table-responsive">
+                            <div class="card-body">
+                                <h5 style="color: #343a40;">Historial Clínico</h5>
+                                <table class="table display responsive nowrap" style="background: azure;">
+                                    <thead class="thead-colored thead-success">
+                                    <tr>
+                                        <th>#</th> <!-- Nueva columna para el contador -->
+                                        <th>Fecha de registro</th>
+                                        <th>Observaciones</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <!-- Verifica si el historial clínico tiene datos -->
+                                    <tr th:if="${#lists.isEmpty(historialClinico)}">
+                                        <td colspan="3" class="text-center">No tiene un historial clínico</td>
+                                    </tr>
+
+                                    <!-- Muestra los registros si existen -->
+                                    <tr th:each="historial, iterStat : ${historialClinico}">
+                                        <td><strong th:text="${iterStat.index + 1}"></strong></td> <!-- Contador -->
+                                        <td th:text="${historial.fecha}"></td>
+                                        <td th:text="${historial.observaciones} ?: 'Sin observaciones'"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <h5 style="color: #343a40;">Historial Vacunación</h5>
+                                <table class="table display responsive nowrap" style="background: azure;">
+                                    <thead class="thead-colored thead-orange">
+                                    <tr>
+                                        <th>#</th> <!-- Nueva columna para el contador -->
+                                        <th>Fecha de registro</th>
+                                        <th>Vacuna</th>
+                                        <th>Observaciones</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <!-- Verifica si el historial de vacunación tiene datos -->
+                                    <tr th:if="${#lists.isEmpty(historialVacuna)}">
+                                        <td colspan="4" class="text-center">No tiene un historial de vacunación</td>
+                                    </tr>
+
+                                    <!-- Muestra los registros si existen -->
+                                    <tr th:each="historial, iterStat : ${historialVacuna}">
+                                        <td><strong th:text="${iterStat.index + 1}"></strong></td> <!-- Contador -->
+                                        <td th:text="${historial.fecha}"></td>
+                                        <td th:text="${historial.vacuna}"></td>
+                                        <td th:text="${historial.observaciones} ?: 'Sin observaciones'"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="~{fragments/Footer::Footer}"></div>
+</div>
+
+<script src="../../lib/jquery/jquery.js"></script>
+<script src="../../lib/popper.js/popper.js"></script>
+<script src="../../lib/bootstrap/bootstrap.js"></script>
+<script src="../../lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script>
+<script src="../../lib/moment/moment.js"></script>
+<script src="../../lib/jquery-ui/jquery-ui.js"></script>
+<script src="../../lib/jquery-switchbutton/jquery.switchButton.js"></script>
+<script src="../../lib/peity/jquery.peity.js"></script>
+<script src="../../js/bracket.js"></script>
+<script src="../../lib/morris.js/morris.js"></script>
+<script src="../../lib/highlightjs/highlight.pack.js"></script>
+</body>
+</html>

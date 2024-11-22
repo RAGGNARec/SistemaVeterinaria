@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head th:replace="~{fragments/Head :: Head}"></head>
+
+<body>
+
+<div th:replace="~{fragments/Menu::Menu}"></div>
+<div th:replace="~{fragments/Header::Header}"></div>
+
+
+<!--INICIO DE CONTENIDO-->
+<div class="br-mainpanel ">
+    <!--BARRA DE NAVEGACION -->
+    <div class="br-pageheader pd-y-5 pd-l-20">
+        <nav class="breadcrumb pd-0 mg-0 tx-12">
+            <a class="breadcrumb-item" th:href="@{/admin}">Inicio</a>
+            <span class="breadcrumb-item"></span> <!-- Separador -->
+            <a class="breadcrumb-item" th:href="@{/mascota}">Listar mascotas</a>
+        </nav>
+    </div>
+    <!--FIN DE BARRA DE NAVEGACION -->
+
+    <div class="br-pagebody mg-t-5 pd-x-30 ">
+        <div class="row row-sm mg-t-20">
+            <div class="col-12">
+                <div class="br-section-wrapper p-3" style=" background-color: #1d2939;">
+                    <!-- FORMULARIO DE EDICIÓN -->
+                    <div class="table-wrapper ">
+                        <div class="dropdown-menu bg-white pd-xs-30 pos-static ft-none shadow-base show mb-4">
+                            <form th:action="@{/mascota/guardar}" th:object="${mascota}"  method="post" enctype="multipart/form-data" style=" margin:0 auto;">
+                                <!-- Campo oculto para el ID de la mascota (necesario para la edición) -->
+                                <input type="hidden" th:field="*{id}" />
+                                <fieldset class="p-2">
+                                    <h3 class="box-title tx-20 tx-bold tx-center tx-uppercase" style="color: #1d2939;">
+                                        EDITAR MASCOTA </h3>
+                                    <hr>
+                                    <div class="row shadow-base" style="background: #343a4047; padding: 8px; margin: 5px; border-radius: 10px;">
+
+                                        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <p class="tx-13 tx-bold tx-uppercase" style="color: #343a40;">
+                                                Modificar la mascota con los nuevos datos </p>
+                                        </div>
+
+                                        <div class="form-group col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                                            <label for="cliente">Seleccione el dueño de la Mascota: <span class="tx-danger">*</span></label>
+                                            <select id="cliente" th:field="*{cliente.id}" class="form-control select2-show-search" data-placeholder="Choose one (with searchbox)" required>
+                                                <option value="" disabled selected>Seleccione...</option>
+                                                <option th:each="usuario : ${usuarios}" th:value="${usuario.id}" th:text="${usuario.nombre}"></option>
+                                            </select>
+                                        </div><!-- col-4 -->
+
+                                        <div class="form-group col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                                            <label for="nombre">Nombre de la mascota: <span class="tx-danger">*</span></label>
+                                            <input type="text" class="form-control"  th:field="*{nombre}" id="nombre" maxlength="256" placeholder="Ingresar nombre de la mascota" required>
+                                        </div>
+                                        <div class="form-group col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                                            <label for="raza">Seleccione la raza: <span class="tx-danger">*</span></label>
+                                            <select id="raza" th:field="*{raza.id}" class="form-control select2-show-search" data-placeholder="Choose one (with searchbox)" required>
+                                                <option value="" disabled selected>Seleccione...</option>
+                                                <option th:each="raza : ${razas}" th:value="${raza.id}" th:text="${raza.nombre}"></option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                                            <label for="sexo">Sexo: <span class="tx-danger">*</span></label>
+                                            <select class="form-control" name="sexo" th:field="*{sexo}" id="sexo" required>
+                                                <option value="">Seleccionar sexo</option>
+                                                <option value="MACHO">MACHO</option>
+                                                <option value="HEMBRA">HEMBRA</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                                            <label for="fechaNacimiento">Fecha de nacimiento:</label>
+                                            <input type="date" class="form-control" name="fechaNacimiento" th:field="*{fechaNacimiento}" id="fechaNacimiento" required>
+                                        </div>
+                                        <div class="form-group col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                                            <label for="edad">Edad en años: <span class="tx-danger">*</span></label>
+                                            <input type="number" class="form-control" name="edad" th:field="*{edad}" id="edad" placeholder="Ingresar la edad en años" required>
+                                        </div>
+
+                                        <div class="form-group col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                                            <label for="color">Color de la mascota: <span class="tx-danger">*</span></label>
+                                            <input type="text" class="form-control" name="color" th:field="*{color}" id="color" maxlength="256" placeholder="Ingresar el color" required>
+                                        </div>
+
+                                        <div class="form-group col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                                            <label for="peso">Peso de la mascota: <span class="tx-danger">*</span></label>
+                                            <input type="number" step="0.1" class="form-control" name="peso" th:field="*{peso}" id="peso" placeholder="Ingresar el peso en kg" required>
+                                        </div>
+                                    </div>
+                                    <!-- Botón de editar -->
+                                    <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <button type="submit" class="btn btn-outline-warning btn-block" style="cursor: pointer;">
+                                            <i class="fa fa-pencil mg-r-10"></i> ACTUALIZAR
+                                        </button>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--FIN DE CONTENIDO-->
+    <div th:replace="~{fragments/Footer::Footer}"></div>
+</div>
+
+
+<script src="../../lib/jquery/jquery.js"></script>
+<script src="../../lib/popper.js/popper.js"></script>
+<script src="../../lib/bootstrap/bootstrap.js"></script>
+<script src="../../lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script>
+<script src="../../lib/moment/moment.js"></script>
+<script src="../../lib/jquery-ui/jquery-ui.js"></script>
+<script src="../../lib/jquery-switchbutton/jquery.switchButton.js"></script>
+<script src="../../lib/peity/jquery.peity.js"></script>
+<script src="../../js/bracket.js"></script>
+<script src="../../lib/morris.js/morris.js"></script>
+<script src="../../lib/highlightjs/highlight.pack.js"></script>
+
+<script src="../../lib/select2/js/select2.min.js"></script>
+
+
+</body>
+</html>

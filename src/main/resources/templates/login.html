@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="~{fragments/Head :: Head}"></head>
+
+<body>
+<!--CONTENIDO-->
+<div class="d-flex align-items-center justify-content-center bg-br-primary ht-100v">
+  <div class="login-wrapper wd-300 wd-xs-350 pd-25 pd-xs-40 bg-white rounded shadow-base">
+    <div class="signin-logo tx-center">
+      <img src="https://veterinarioatizapan.com/wp-content/uploads/2024/07/logo-1024x330.png" alt="Logo" style="width: 100%; max-width: 200px;">
+    </div>
+
+    <!-- MENSAJE DE CIERRE DE SESION -->
+    <div th:if="${param.logout}" class="alert alert-bordered alert-info" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">×</span>
+      </button>
+      <strong class="d-block d-sm-inline-block-force">¡Aviso!</strong> Usted ha cerrado la sesión correctamente.
+    </div>
+
+    <div class="tx-center mg-b-60">Ingresar al Sistema de veterinaria</div>
+
+    <!--MENSAJE DE ERROR DE CONTRASEÑA-->
+    <div th:if="${param.error}" class="alert alert-bordered alert-danger" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">×</span>
+      </button>
+      <strong class="d-block d-sm-inline-block-force">error!</strong> Usuario o Contraseña incorrecto
+    </div>
+    <!--FIN MENSAJE DE ERROR DE CONTRASEÑA-->
+
+    <!--FORMULARIO DE LOGIN-->
+    <form th:action="@{/login}" method="post">
+      <div class="form-group">
+        <input type="text" name="username" class="form-control" placeholder="Ingrese Usuario" required>
+      </div>
+      <div class="form-group">
+        <input type="password" class="form-control" name="password" placeholder="Ingrese Contraseña" required>
+      </div>
+      <button type="submit" class="btn btn-info btn-block" style="cursor: pointer;">INGRESAR</button>
+    </form>
+    <!--FIN FORMULARIO DE LOGIN-->
+  </div>
+</div>
+<script src="../lib/jquery/jquery.js"></script>
+<script src="../lib/popper.js/popper.js"></script>
+<script src="../lib/bootstrap/bootstrap.js"></script>
+
+</body>
+</html>

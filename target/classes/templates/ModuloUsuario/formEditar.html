@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head th:replace="~{fragments/Head :: Head}"></head>
+
+<body>
+
+<div th:replace="~{fragments/Menu::Menu}"></div>
+<div th:replace="~{fragments/Header::Header}"></div>
+
+<!--INICIO DE CONTENIDO-->
+<div class="br-mainpanel ">
+    <!--BARRA DE NAVEGACION -->
+    <div class="br-pageheader pd-y-5 pd-l-20">
+        <nav class="breadcrumb pd-0 mg-0 tx-12">
+            <a class="breadcrumb-item" th:href="@{/admin}">Inicio</a>
+        </nav>
+    </div>
+    <!--FIN DE BARRA DE NAVEGACION -->
+
+    <div class="br-pagebody mg-t-5 pd-x-30 ">
+        <div class="row row-sm mg-t-20">
+            <div class="col-12">
+                <div class="br-section-wrapper p-3" style=" background-color: #1d2939;">
+                    <!-- FORMULARIO -->
+                    <div class="table-wrapper ">
+                        <div class="dropdown-menu bg-white pd-xs-30 pos-static ft-none shadow-base show mb-4">
+                            <form action="/usuario/actualizar" th:object="${usuario}" method="post" enctype="multipart/form-data" style="margin: 0 auto;">
+                                <!-- Campo oculto para el ID del usuario (necesario para la edición) -->
+                                <input type="hidden" th:field="*{id}"/>
+                                <fieldset class="p-2">
+                                    <h3 class="box-title tx-20 tx-bold tx-center tx-uppercase" style="color: #1d2939">
+                                        EDITAR USUARIO</h3>
+                                    <hr>
+                                    <div class="row shadow-base" style="background: #343a4047; padding: 8px; margin: 5px; border-radius: 10px;">
+
+                                        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <p class="tx-13 tx-bold tx-uppercase" style="color: #343a40;">
+                                                Modificar un nuevo usuario </p>
+                                        </div>
+                                        <div class="form-group col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                                            <label for="nombre">Nombre: <span class="tx-danger">*</span></label>
+                                            <input type="text" class="form-control" th:field="*{nombre}" id="nombre" maxlength="256" placeholder="Ingresar nombre de la usuario" required>
+                                        </div>
+                                        <div class="form-group col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                                            <label for="apellido">Apellido: <span class="tx-danger">*</span></label>
+                                            <input type="text" class="form-control" th:field="*{apellido}" id="apellido" maxlength="256" placeholder="Ingresar apellido de la usuario" required>
+                                        </div>
+                                        <div class="form-group col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                                            <label for="cedula">Cédula: <span class="tx-danger">*</span></label>
+                                            <input type="text"
+                                                   class="form-control"
+                                                   th:field="*{cedula}"
+                                                   id="cedula"
+                                                   maxlength="10"
+                                                   pattern="\d{10}"
+                                                   placeholder="Ingresar cédula"
+                                                   required
+                                                   title="Ingrese una cédula válida de 10 dígitos">
+                                            <div class="invalid-feedback">
+                                                Por favor, ingrese un número de cédula válido.
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                                            <label for="email">Email: <span class="tx-danger">*</span></label>
+                                            <input type="email" class="form-control" th:field="*{email}" id="email" placeholder="Ingresar email" required>
+                                        </div>
+                                        <div class="form-group col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                                            <label for="telefono">Teléfono: <span class="tx-danger">*</span></label>
+                                            <input type="text"
+                                                   class="form-control"
+                                                   th:field="*{telefono}"
+                                                   id="telefono"
+                                                   maxlength="10"
+                                                   pattern="\d{10}"
+                                                   placeholder="Ingrese un número de teléfono (10 dígitos)"
+                                                   required
+                                                   title="El número de teléfono debe tener exactamente 10 dígitos numéricos.">
+                                            <div class="invalid-feedback">
+                                                Por favor, ingrese un número de teléfono válido de 10 dígitos.
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                                            <label for="direccion">Dirección: <span class="tx-danger">*</span></label>
+                                            <textarea class="form-control"
+                                                      th:field="*{direccion}"
+                                                      id="direccion"
+                                                      rows="4"
+                                                      maxlength="200"
+                                                      placeholder="Ingrese su dirección (Ej.: Calle Principal 123, Ciudad, Provincia)"
+                                                      required
+                                                      title="Ingrese una dirección válida. Máximo 200 caracteres."></textarea>
+                                            <div class="invalid-feedback">
+                                                Por favor, ingrese una dirección válida.
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <p class="tx-13 tx-bold tx-uppercase" style="color: #343a40;">
+                                                Usuario y Rol</p>
+                                        </div>
+
+                                        <div class="form-group col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                                            <label for="rol">Seleccione el rol: <span class="tx-danger">*</span></label>
+                                            <select class="form-control selectpicker" th:field="*{roles}" data-live-search="true" id="rol" required multiple>
+                                                <option value="" disabled selected>Seleccione el rol...</option>
+                                                <option th:each="rol : ${roles}"
+                                                        th:value="${rol.id}"
+                                                        th:text="${rol.tipo}"
+                                                        th:selected="${usuario.roles.contains(rol)}">
+                                                </option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                                            <label for="username">Usuario: <span class="tx-danger">*</span></label>
+                                            <input type="text" class="form-control" th:field="*{username}" id="username" placeholder="Ingresar el nombre del usuario" required>
+                                        </div>
+
+                                        <div class="form-group col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                                            <label for="password">Contraseña: <span class="tx-danger">*</span></label>
+                                            <input type="password" class="form-control" th:field="*{password}" id="password" placeholder="Ingresar la contraseña" required>
+                                        </div>
+                                    </div>
+                                    <!-- Botón de editar -->
+                                    <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <button type="submit" class="btn btn-outline-warning btn-block" style="cursor: pointer;">
+                                            <i class="fa fa-pencil mg-r-10"></i> ACTUALIZAR
+                                        </button>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--FIN DE CONTENIDO-->
+    <div th:replace="~{fragments/Footer::Footer}"></div>
+</div>
+
+<script src="../../lib/jquery/jquery.js"></script>
+<script src="../../lib/popper.js/popper.js"></script>
+<script src="../../lib/bootstrap/bootstrap.js"></script>
+<script src="../../lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script>
+<script src="../../lib/moment/moment.js"></script>
+<script src="../../lib/jquery-ui/jquery-ui.js"></script>
+<script src="../../lib/jquery-switchbutton/jquery.switchButton.js"></script>
+<script src="../../lib/peity/jquery.peity.js"></script>
+<script src="../../js/bracket.js"></script>
+<script src="../../lib/morris.js/morris.js"></script>
+<script src="../../lib/highlightjs/highlight.pack.js"></script>
+
+</body>
+</html>
+

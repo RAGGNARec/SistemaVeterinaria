@@ -1,33 +1,179 @@
-
 <div th:fragment="Header">
+  <div class="br-header">
+    <div class="br-header-left">
+      <div class="navicon-left hidden-md-down"><a id="btnLeftMenu" href=""><i class="icon ion-navicon-round"></i></a></div>
+      <div class="navicon-left hidden-lg-up"><a id="btnLeftMenuMobile" href=""><i class="icon ion-navicon-round"></i></a></div>
+    </div>
+    <div class="br-header-right">
+      <nav class="nav">
+        <div class="dropdown">
+          <a href="#" class="nav-link nav-link-profile" data-toggle="dropdown">
+            <span class="logged-name hidden-md-down">Usuario - Perfil</span>
+            <span class="square-10 bg-success"></span>
+          </a>
+          <input type="hidden">
+          <div class="dropdown-menu dropdown-menu-header wd-200">
+            <!-- Formulario de logout (oculto) -->
+            <form id="logoutForm" th:action="@{/logout}" method="post" style="display: none;">
+              <!-- El formulario está oculto pero será enviado cuando se haga clic en el enlace -->
+            </form>
 
-<div class="br-header">
-  <div class="br-header-left">
-    <div class="navicon-left hidden-md-down"><a id="btnLeftMenu" href=""><i class="icon ion-navicon-round"></i></a></div>
-    <div class="navicon-left hidden-lg-up"><a id="btnLeftMenuMobile" href=""><i class="icon ion-navicon-round"></i></a></div>
-  </div>
-  <div class="br-header-right">
-    <nav class="nav">
-      <div class="dropdown">
-        <a href="#" class="nav-link nav-link-profile" data-toggle="dropdown">
-          <span class="logged-name hidden-md-down">Usuario - Perfil</span>
-          <img src="../../files/perfil.png" class="wd-32 rounded-circle" alt="">
-          <span class="square-10 bg-success"></span>
+            <!-- Menú de perfil del usuario -->
+            <ul class="list-unstyled user-profile-nav">
+              <li>
+                <!-- El enlace de "Salir" ejecuta el submit del formulario de logout -->
+                <a href="#" onclick="document.getElementById('logoutForm').submit();">
+                  <i class="icon ion-power"></i> Salir
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div class="navicon-right">
+        <a id="btnRightMenu" href="" class="pos-relative">
+          <i class="icon ion-ios-chatboxes-outline"></i>
+          <!-- start: if statement -->
+          <span class="square-8 bg-danger pos-absolute t-10 r--5 rounded-circle"></span>
+          <!-- end: if statement -->
         </a>
+      </div><!-- navicon-right -->
+    </div><!-- br-header-right -->
+  </div><!-- br-header -->
+  <!-- ########## END: HEAD PANEL ########## -->
+  <!-- ########## START: RIGHT PANEL ########## -->
+  <div class="br-sideright">
+    <ul class="nav nav-tabs sidebar-tabs" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" role="tab" href="#contacts"><i class="icon ion-ios-contact-outline tx-24"></i></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" role="tab" href="#calendarioHeader"><i class="icon ion-ios-calendar-outline tx-24"></i></a>
+      </li>
+    </ul><!-- sidebar-tabs -->
 
-        <input type="hidden" id="usuariodbkx" value="usuariodbk_value">
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div class="tab-pane pos-absolute a-0 mg-t-60 overflow-y-auto active" id="contacts" role="tabpanel">
+        <label class="sidebar-label pd-x-25 mg-t-25">Contactos en línea</label>
+        <div class="contact-list pd-x-10">
+          <a href="" class="contact-list-link new">
+            <div class="d-flex">
+              <div class="pos-relative">
+                <img src="http://via.placeholder.com/280x280" class="wd-40 rounded-circle" alt="">
+                <div class="contact-status-indicator bg-success bd-br-primary"></div>
+              </div>
+              <div class="contact-person">
+                <p class="mg-b-0">Marilyn Tarter</p>
+                <span class="tx-12 op-5 d-inline-block">Clemson, CA</span>
+              </div>
+              <span class="tx-info tx-12"><span class="square-8 bg-info rounded-circle"></span> 1 new</span>
+            </div><!-- d-flex -->
+          </a><!-- contact-list-link -->
+          <a href="" class="contact-list-link">
+            <div class="d-flex">
+              <div class="pos-relative">
+                <img src="http://via.placeholder.com/280x280" class="wd-40 rounded-circle" alt="">
+                <div class="contact-status-indicator bg-success bd-br-primary"></div>
+              </div>
+              <div class="mg-l-10">
+                <p class="mg-b-0 ">Belinda Connor</p>
+                <span class="tx-12 op-5 d-inline-block">Fort Kent, ME</span>
+              </div>
+            </div><!-- d-flex -->
+          </a><!-- contact-list-link -->
+          <a href="" class="contact-list-link new">
+            <div class="d-flex">
+              <div class="pos-relative">
+                <img src="http://via.placeholder.com/280x280" class="wd-40 rounded-circle" alt="">
+                <div class="contact-status-indicator bg-success bd-br-primary"></div>
+              </div>
+              <div class="contact-person">
+                <p class="mg-b-0">Britanny Cevallos</p>
+                <span class="tx-12 op-5 d-inline-block">Shiboygan Falls, WI</span>
+              </div>
+              <span class="tx-info tx-12"><span class="square-8 bg-info rounded-circle"></span> 3 new</span>
+            </div><!-- d-flex -->
+          </a><!-- contact-list-link -->
+          <a href="" class="contact-list-link new">
+            <div class="d-flex">
+              <div class="pos-relative">
+                <img src="http://via.placeholder.com/280x280" class="wd-40 rounded-circle" alt="">
+                <div class="contact-status-indicator bg-success bd-br-primary"></div>
+              </div>
+              <div class="contact-person">
+                <p class="mg-b-0">Brandon Lawrence</p>
+                <span class="tx-12 op-5 d-inline-block">Snohomish, WA</span>
+              </div>
+              <span class="tx-info tx-12"><span class="square-8 bg-info rounded-circle"></span> 1 new</span>
+            </div><!-- d-flex -->
+          </a><!-- contact-list-link -->
+          <a href="" class="contact-list-link">
+            <div class="d-flex">
+              <div class="pos-relative">
+                <img src="http://via.placeholder.com/280x280" class="wd-40 rounded-circle" alt="">
+                <div class="contact-status-indicator bg-success bd-br-primary"></div>
+              </div>
+              <div class="contact-person">
+                <p class="mg-b-0">Andrew Wiggins</p>
+                <span class="tx-12 op-5 d-inline-block">Springfield, MA</span>
+              </div>
+            </div><!-- d-flex -->
+          </a><!-- contact-list-link -->
+          <a href="" class="contact-list-link">
+            <div class="d-flex">
+              <div class="pos-relative">
+                <img src="http://via.placeholder.com/280x280" class="wd-40 rounded-circle" alt="">
+                <div class="contact-status-indicator bg-success bd-br-primary"></div>
+              </div>
+              <div class="contact-person">
+                <p class="mg-b-0">Theodore Gristen</p>
+                <span class="tx-12 op-5 d-inline-block">Nashville, TN</span>
+              </div>
+            </div><!-- d-flex -->
+          </a><!-- contact-list-link -->
+          <a href="" class="contact-list-link">
+            <div class="d-flex">
+              <div class="pos-relative">
+                <img src="http://via.placeholder.com/280x280" class="wd-40 rounded-circle" alt="">
+                <div class="contact-status-indicator bg-success bd-br-primary"></div>
+              </div>
+              <div class="contact-person">
+                <p class="mg-b-0">Deborah Miner</p>
+                <span class="tx-12 op-5 d-inline-block">North Shore, CA</span>
+              </div>
+            </div><!-- d-flex -->
+          </a><!-- contact-list-link -->
+        </div><!-- contact-list -->
+      </div><!-- #contacts -->
 
-        <div class="dropdown-menu dropdown-menu-header wd-200">
-          <ul class="list-unstyled user-profile-nav">
-            <!--<li><a href="#"><i class="icon ion-ios-gear"></i> Perfil</a></li>-->
-            <li><a href="#"><i class="icon ion-power"></i> Salir</a></li>
-          </ul>
+      <div class="tab-pane pos-absolute a-0 mg-t-60 overflow-y-auto" id="calendarioHeader" role="tabpanel">
+        <label class="sidebar-label pd-x-25 mg-t-25">Tiempo &amp; Fecha</label>
+        <div class="pd-x-25">
+          <h2 id="brTime" class="tx-white tx-lato mg-b-5"></h2>
+          <h6 id="brDate" class="tx-white tx-light op-3"></h6>
+        </div>
+
+        <label class="sidebar-label pd-x-25 mg-t-25">Calendario</label>
+        <div class="datepicker sidebar-datepicker"></div>
+
+        <label class="sidebar-label pd-x-25 mg-t-25">Eventos del día</label>
+        <div class="pd-x-25">
+          <div class="list-group sidebar-event-list mg-b-20">
+            <!-- Itera sobre las citas de hoy -->
+            <div th:each="cita : ${citasHoy}" class="list-group-item">
+              <div>
+                <!-- Mostrar nombre de la mascota y el servicio asociado -->
+                <h6 class="tx-white tx-13 mg-b-5 tx-normal" th:text="${cita.mascota.nombre} + ' - ' + ${cita.servicio.nombre}">Evento</h6>
+                <p class="mg-b-0 tx-white tx-12 op-2" th:text="${cita.hora}">Hora</p>
+              </div>
+              <a href="#" class="more"><i class="icon ion-android-more-vertical tx-18"></i></a>
+            </div>
+          </div>
+          <a href="" class="btn btn-block btn-outline-secondary tx-uppercase tx-11 tx-spacing-2" th:href="@{/cita}">+ CITA</a>
+          <br>
         </div>
       </div>
-    </nav>
+    </div><!-- tab-content -->
   </div>
-</div>
-
-
-
 </div>

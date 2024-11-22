@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
@@ -11,24 +12,31 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "historial_clinico")
 public class HistorialClinico {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDate fecha;
-
-    private String observaciones;
-
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING) // Usa el enum para el estado
     @Column(nullable = false)
-    private EstadoHistorial estado = EstadoHistorial.ACTIVO;
-
-    @ManyToOne
-    @JoinColumn(name = "mascota_id", foreignKey = @ForeignKey(name = "FK_historialClinico_mascota_id"))
-    private Mascota mascota; // Se cambió el nombre de la FK
+    private EstadoHistorial estado = EstadoHistorial.ACTIVO; // Por defecto, ACTIVO
 
     public enum EstadoHistorial {
-        ACTIVO, INACTIVO
+        ACTIVO, INACTIVO;
     }
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd") // Formato de fecha
+    @Column(nullable = false) // Fecha no nula
+    private LocalDate fecha;
+
+    @Column(length = 255) // Observaciones opcionales
+    private String observaciones;
+
+    @ManyToOne // Relación con la tabla Mascota
+    @JoinColumn(name = "mascota_id", foreignKey = @ForeignKey(name = "FK_historial_clinico_mascota_id"), nullable = false)
+    private Mascota mascota; // ID de la mascota
+
+
 }

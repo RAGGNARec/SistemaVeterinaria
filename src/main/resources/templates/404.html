@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="~{fragments/Head :: Head}"></head>
+
+<body>
+<!--CONTENIDO-->
+<div class="ht-100v d-flex align-items-center justify-content-center">
+    <div class="wd-lg-70p wd-xl-50p tx-center pd-x-40">
+        <h1 class="tx-100 tx-xs-140 tx-normal tx-inverse tx-roboto mg-b-0">404!</h1>
+        <h5 class="tx-xs-24 tx-normal tx-info mg-b-30 lh-5">La página que estás buscando no ha sido encontrada.</h5>
+        <p class="tx-16 mg-b-30">No tienes permisos para acceder a la página que estabas buscando.
+            Regresa a tu panel o cierra sesion y vuelve a ingresar a tu perfil</p>
+    </div>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Cerrar Sesion" class="btn btn-primary"/>
+    </form>
+</div><!-- ht-100v -->
+
+<script src="../lib/jquery/jquery.js"></script>
+<script src="../lib/popper.js/popper.js"></script>
+<script src="../lib/bootstrap/bootstrap.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head th:replace="~{fragments/Head :: Head}"></head>
+<body>
+
+<div th:replace="~{fragments/Menu::Menu}"></div>
+<div th:replace="~{fragments/Header::Header}"></div>
+
+<!-- INICIO DE CONTENIDO -->
+<div class="br-mainpanel">
+    <!-- BARRA DE NAVEGACION -->
+    <div class="br-pageheader pd-y-5 pd-l-20">
+        <nav class="breadcrumb pd-0 mg-0 tx-12">
+            <a class="breadcrumb-item" th:href="@{/admin}">Inicio</a>
+            <span class="breadcrumb-item"></span> <!-- Separador -->
+            <a class="breadcrumb-item" th:href="@{/servicio}">Listar servicios</a>
+        </nav>
+    </div>
+    <!-- FIN DE BARRA DE NAVEGACION -->
+    <!-- Mensaje de éxito o error -->
+    <div class="container">
+        <div th:if="${message != null}" class="alert alert-bordered alert-success" role="alert">
+            [[${message}]]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+    </div>
+    <!-- Fin mensaje -->
+
+    <div class="br-pagebody mg-t-5 pd-x-30">
+        <div class="row row-sm mg-t-20">
+            <div class="col-md-12">
+                <!-- FORMULARIO DE EDICIÓN -->
+                <div class="br-section-wrapper p-3">
+                    <div class="table-wrapper">
+                        <div class="dropdown-menu bg-white pd-xs-30 pos-static ft-none shadow-base show mb-4">
+                            <form th:action="@{/servicio/guardar}" th:object="${servicio}" method="post" enctype="multipart/form-data" style="margin:0 auto;">
+                                <input type="hidden" th:field="*{id}" />
+                                <fieldset class="p-2">
+                                    <h3 class="box-title tx-20 tx-bold tx-center tx-uppercase" style="color: #1d2939;">INGRESAR SERVICIO</h3>
+                                    <hr>
+                                    <div class="row shadow-base" style="background: #343a4047; padding: 8px; margin: 5px; border-radius: 10px;">
+
+                                        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <p class="tx-13 tx-bold tx-uppercase" style="color: #343a40;">
+                                                Agregar nuevo servicio </p>
+                                        </div>
+
+                                        <div class="form-group col-lg-7">
+                                            <label for="nombre">Nombre: <span class="tx-danger">*</span></label>
+                                            <input type="text" class="form-control" th:field="*{nombre}" id="nombre" maxlength="256" placeholder="Ingresar nombre de la servicio" required>
+                                        </div>
+                                        <div class="form-group col-lg-5">
+                                            <label for="precio">Precio: <span class="tx-danger">*</span></label>
+                                            <input type="number" class="form-control" th:field="*{precio}" id="precio"
+                                                   placeholder="Ingresar el precio del servicio" step="0.01" min="0" required>
+                                        </div>
+                                        <div class="form-group col-lg-7">
+                                            <label for="descripcion">Descripción: <span class="tx-danger">*</span></label>
+                                            <textarea class="form-control" th:field="*{descripcion}" id="descripcion"
+                                                      maxlength="256" placeholder="Ingresar la descripción del servicio"
+                                                      rows="4" required></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <button type="submit" class="btn btn-outline-primary btn-block" style="cursor: pointer;">
+                                            <i class="icon ion-archive mg-r-10"></i> GUARDAR
+                                        </button>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <!-- TABLA MASCOTA -->
+                <div class="br-section-wrapper p-3">
+                    <table id="datatable2" class="table display responsive nowrap table-bordered" style="background: azure;">
+                        <thead class="thead-colored thead-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th>Precio</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="servicio, iterStat  : ${listarServicios}">
+                            <td><strong th:text="${iterStat.index + 1}"></strong></td> <!-- Contador -->
+                            <td><strong th:text="${servicio.nombre}"></strong></td>
+                            <td th:text="${servicio.descripcion}"></td>
+                            <td><span>$</span><span th:text="${servicio.precio}"></span></td>
+                            <td th:text="${servicio.estado}"></td>
+                            <td>
+                                <a th:href="@{/servicio/editar/{id}(id=${servicio.id})}" class="btn btn-outline-warning btn-icon" style="padding: 8px;">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FIN DE CONTENIDO -->
+    <div th:replace="~{fragments/Footer::Footer}"></div>
+</div>
+
+<script src="../../lib/jquery/jquery.js"></script>
+<script src="../../lib/popper.js/popper.js"></script>
+<script src="../../lib/bootstrap/bootstrap.js"></script>
+<script src="../../lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script>
+<script src="../../lib/moment/moment.js"></script>
+<script src="../../lib/jquery-ui/jquery-ui.js"></script>
+<script src="../../lib/jquery-switchbutton/jquery.switchButton.js"></script>
+<script src="../../lib/peity/jquery.peity.js"></script>
+<script src="../../js/bracket.js"></script>
+<script src="../../lib/morris.js/morris.js"></script>
+<script src="../../lib/highlightjs/highlight.pack.js"></script>
+
+
+<!-- DataTables JS -->
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+
+<script>
+    $('#datatable2').DataTable({
+      responsive: true,
+      pageLength: 5, // Número de elementos por página
+      lengthMenu: [5, 10, 15, 20], // Opciones del selector de elementos por página
+      language: {
+          searchPlaceholder: 'Buscar...',
+          sSearch: '',
+          lengthMenu: 'Mostrar _MENU_ registros por página', // Texto del selector
+          paginate: {
+              next: 'Siguiente',
+              previous: 'Anterior'
+          }
+      }
+  });
+</script>
+
+<script>
+    function cargarServicio(id, nombre, descripcion, precio) {
+        document.getElementById('idServicio').value = id; // Carga el ID
+        document.getElementById('nombre').value = nombre; // Carga el nombre
+        document.getElementById('descripcion').value = descripcion; // Carga la descripción
+        document.getElementById('precio').value = precio; // Carga el precio
+    }
+</script>
+
+
+
+</body>
+</html>

@@ -182,7 +182,7 @@ body {
   font-size: 0.875rem;
   font-weight: normal;
   line-height: 1.5;
-  color: #868ba1;
+  color: #595c6d;
   background-color: #E9ECEF;
 }
 
@@ -2494,7 +2494,8 @@ tbody.collapse.show {
   padding: 0.5rem 0;
   margin: 0.125rem 0 0;
   font-size: 0.875rem;
-  color: #868ba1;
+  color: #6b6c70;
+  font-weight: 500;
   text-align: left;
   list-style: none;
   background-color: #fff;
@@ -11583,6 +11584,8 @@ table.dataTable.no-footer {
   padding-bottom: 0.54rem;
   background-color: #e9ecef;
   border-color: transparent;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 .dataTables_wrapper .dataTables_paginate .paginate_button:hover, .dataTables_wrapper .dataTables_paginate .paginate_button:focus {
   background-color: #ced4da;
@@ -11598,6 +11601,8 @@ table.dataTable.no-footer {
   background-image: none;
   border-color: transparent;
   color: #fff !important;
+  padding-left: 12px;
+  padding-right: 12px;
 }
 .dataTables_wrapper .dataTables_paginate .paginate_button.disabled, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:focus {
   background-color: #e9ecef;

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="~{fragments/Head :: Head}"></head>
+
+<body>
+
+<div th:replace="~{fragments/Menu::Menu}"></div>
+<div th:replace="~{fragments/Header::Header}"></div>
+
+<!--INICIO DE CONTENIDO-->
+<div class="br-mainpanel">
+    <div class="br-pageheader pd-y-5 pd-l-20">
+        <nav class="breadcrumb pd-0 mg-0 tx-12">
+            <a class="breadcrumb-item" th:href="@{/cliente}">Inicio</a>
+            <span class="breadcrumb-item">Perfil Veterinaria</span>
+        </nav>
+    </div>
+
+    <div class="br-pagebody mg-t-5 pd-x-30">
+        <div class="row row-sm mg-t-20">
+            <div class="col-md-6">
+                <div class="br-section-wrapper p-3">
+                    <!-- Mostrar los datos de la veterinaria en forma de tarjeta -->
+                    <div th:each="veterinaria : ${veterinarias}" class="card pd-20 pd-xs-30 shadow-base bd-0 mb-4">
+                        <h6 class="tx-gray-800 tx-uppercase tx-semibold tx-13 mg-b-25">Información del negocio</h6>
+
+                        <label class="tx-10 tx-uppercase tx-mont tx-medium tx-spacing-1 mg-b-2">Nombre</label>
+                        <p class="tx-info mg-b-25" th:text="${veterinaria.nombre}">Nombre</p>
+
+                        <label class="tx-10 tx-uppercase tx-mont tx-medium tx-spacing-1 mg-b-2">Cédula</label>
+                        <p class="tx-inverse mg-b-25" th:text="${veterinaria.cedula}">Cédula</p>
+
+                        <label class="tx-10 tx-uppercase tx-mont tx-medium tx-spacing-1 mg-b-2">Dirección</label>
+                        <p class="tx-inverse mg-b-25" th:text="${veterinaria.direccion}">Dirección</p>
+
+                        <label class="tx-10 tx-uppercase tx-mont tx-medium tx-spacing-1 mg-b-2">Email</label>
+                        <p class="tx-inverse mg-b-25" th:text="${veterinaria.email}">Email</p>
+
+                        <label class="tx-10 tx-uppercase tx-mont tx-medium tx-spacing-1 mg-b-2">Estado</label>
+                        <p class="tx-inverse mg-b-25" th:text="${veterinaria.estado}">Estado</p>
+
+                        <label class="tx-10 tx-uppercase tx-mont tx-medium tx-spacing-1 mg-b-2">Teléfono</label>
+                        <p class="tx-inverse mg-b-50" th:text="${veterinaria.telefono}">Teléfono</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Agregar imagen de la clínica veterinaria -->
+            <div class="col-md-6">
+                <div class="card shadow-base bd-0 mb-4">
+                    <img src="https://www.simbiotia.com/wp-content/uploads/diseno-de-clinicas-veterinarias.jpg"
+                         class="card-img-top img-fluid" alt="Diseño de Clínica Veterinaria">
+                    <div class="card-body text-center">
+                        <p class="card-text">Vista de la clínica veterinaria, un espacio diseñado para el bienestar animal.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div th:replace="~{fragments/Footer::Footer}"></div>
+
+</div>
+
+<script src="../../lib/jquery/jquery.js"></script>
+<script src="../../lib/popper.js/popper.js"></script>
+<script src="../../lib/bootstrap/bootstrap.js"></script>
+<script src="../../lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script>
+<script src="../../lib/moment/moment.js"></script>
+<script src="../../lib/jquery-ui/jquery-ui.js"></script>
+<script src="../../lib/jquery-switchbutton/jquery.switchButton.js"></script>
+<script src="../../lib/peity/jquery.peity.js"></script>
+<script src="../../js/bracket.js"></script>
+<script src="../../lib/morris.js/morris.js"></script>
+<script src="../../lib/highlightjs/highlight.pack.js"></script>
+</body>
+</html>

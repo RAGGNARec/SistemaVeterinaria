@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Meta -->
+  <meta name="description" content="Sistema de Veterinaria con citas médicas, desarrollado por UISRAEL.">
+  <meta name="author" content="UISRAEL">
+
+  <title>Sistema de Veterinaria</title>
+
+  <!-- vendor css -->
+  <link href="../../lib/font-awesome/css/font-awesome.css" rel="stylesheet">
+  <link href="../../lib/Ionicons/css/ionicons.css" rel="stylesheet">
+  <link href="../../lib/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet">
+  <link href="../../lib/jquery-switchbutton/jquery.switchButton.css" rel="stylesheet">
+  <link href="../../lib/rickshaw/rickshaw.min.css" rel="stylesheet">
+  <link href="../../lib/chartist/chartist.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <!-- Bracket Personalizados CSS -->
+  <link rel="stylesheet" href="../../css/bracket.css">
+
+  <!-- FullCalendar CSS -->
+  <link href='https://unpkg.com/fullcalendar@5.10.2/main.min.css' rel='stylesheet' />
+  <script src='https://unpkg.com/fullcalendar@5.10.2/main.min.js'></script>
+
+  <style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 20px;
+    }
+
+    #calendar {
+        max-width: 950px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        border: 1px solid #dee2e6;
+        padding: 20px;
+        color: black;!import
+    }
+
+    .fc-toolbar {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 0.5rem;
+    }
+
+    .fc-toolbar button {
+        background-color: #0056b3;
+        color: white;
+        border: none;
+        border-radius: 0.25rem;
+        padding: 8px 12px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .fc-toolbar button:hover {
+        background-color: #004494;
+    }
+
+    /* Estilo general para eventos */
+    .fc-daygrid-event {
+    color: white;
+    border-radius: 0.25rem;
+    padding: 5px;
+    margin: 2px 0;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s;
+    white-space: nowrap; /* Evita que el texto se desborde */
+    overflow: hidden; /* Asegura que el contenido no se salga del contenedor */
+    text-overflow: ellipsis; /* Muestra "..." cuando el texto es demasiado largo */
+    font-size: 12px; /* Ajusta el tamaño del texto según sea necesario */
+}
+
+.fc-daygrid-event span {
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%; /* Asegura que el texto no se desborde */
+}
+
+    /* Colores específicos según el estado del evento */
+    .event-pendiente {
+        background-color: #ffb23f; /* Color para PENDIENTE */
+    }
+
+    .event-cancelado {
+        background-color: #e74c3c; /* Color para CANCELADO (Rojo) */
+    }
+
+    .event-completado {
+        background-color: #2ecc71; /* Color para COMPLETADO (Verde) */
+    }
+
+    .fc-daygrid-day-number {
+        font-weight: bold;
+        font-size: 1.2em;
+    }
+
+    .fc-daygrid-day {
+        background-color: #f8f9fa;
+    }
+
+    .fc .fc-daygrid-day.fc-day-today{
+        background-color: rgb(9 125 145 / 29%); !important;
+    }
+
+    .fc-daygrid-day.fc-day-today .fc-daygrid-day-number {
+        color: #007bff;
+    }
+  </style>
+</head>
+<body>
+
+<div th:replace="~{fragments/Menu::Menu}"></div>
+<div th:replace="~{fragments/Header::Header}"></div>
+
+<!-- INICIO DE CONTENIDO -->
+<div class="br-mainpanel">
+  <!-- BARRA DE NAVEGACION -->
+  <div class="br-pageheader pd-y-5 pd-l-20">
+    <nav class="breadcrumb pd-0 mg-0 tx-12">
+      <a class="breadcrumb-item" th:href="@{/admin}">Inicio</a>
+      <span class="breadcrumb-item"></span> <!-- Separador -->
+      <a class="breadcrumb-item" th:href="@{/cita}">Agregar nueva cita</a>
+    </nav>
+  </div>
+  <!-- FIN DE BARRA DE NAVEGACION -->
+
+  <div id='calendar'></div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var calendarEl = document.getElementById('calendar');
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            locale: 'es',
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            },
+            events: function(fetchInfo, successCallback, failureCallback) {
+                fetch("/api/citas") // Endpoint para obtener citas
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`Error HTTP: ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        const events = data.map(cita => {
+                            // Determina la clase según el estado de la cita
+                            let eventClass = '';
+                            if (cita.estado === 'PENDIENTE') {
+                                eventClass = 'event-pendiente';
+                            } else if (cita.estado === 'CANCELADA') {
+                                eventClass = 'event-cancelado';
+                            } else if (cita.estado === 'COMPLETADA') {
+                                eventClass = 'event-completado';
+                            }
+
+                            return {
+                                title: `${cita.motivo} <br> (${cita.estado})`,
+                                start: `${cita.fecha}T${cita.hora}`,
+                                extendedProps: {
+                                    estado: cita.estado,
+                                    motivo: cita.motivo
+                                },
+                                className: eventClass // Agrega la clase al evento
+                            };
+                        });
+                        successCallback(events);
+                    })
+                    .catch(error => {
+                        console.error("Error al cargar las citas:", error);
+                        alert("No se pudieron cargar las citas. Por favor, intenta de nuevo más tarde.");
+                        failureCallback(error);
+                    });
+            },
+            eventContent: function(arg) {
+                let text = document.createElement('div');
+                text.innerHTML = `<strong>${arg.event.title}</strong>`;
+                return { domNodes: [text] };
+            }
+        });
+
+        calendar.render();
+    });
+  </script>
+
+  <!-- FIN DE CONTENIDO -->
+  <div th:replace="~{fragments/Footer::Footer}"></div>
+</div>
+
+<script src="../../lib/jquery/jquery.js"></script>
+<script src="../../lib/popper.js/popper.js"></script>
+<script src="../../lib/bootstrap/bootstrap.js"></script>
+<script src="../../lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script>
+<script src="../../lib/moment/moment.js"></script>
+<script src="../../lib/jquery-ui/jquery-ui.js"></script>
+<script src="../../lib/jquery-switchbutton/jquery.switchButton.js"></script>
+<script src="../../lib/peity/jquery.peity.js"></script>
+<script src="../../js/bracket.js"></script>
+<script src="../../lib/morris.js/morris.js"></script>
+<script src="../../lib/highlightjs/highlight.pack.js"></script>
+</body>
+</html>

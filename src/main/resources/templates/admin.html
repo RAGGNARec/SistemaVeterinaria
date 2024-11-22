@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="~{fragments/Head :: Head}"></head>
+
+<body style="background-image: url('/img/veterinariaFondo.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; position: relative;">
+
+<!-- Capa oscura -->
+
+<div th:replace="~{fragments/Menu::Menu}"></div>
+<div th:replace="~{fragments/Header::Header}"></div>
+
+<!--CONTENIDO-->
+
+<div class="br-mainpanel" >
+
+    <div class=" shadow-base bd-0 rounded-0 widget-4">
+        <div class="card-body" style="background-color: #1d29398c;">
+
+            <!-- Bienvenida al usuario autenticado -->
+            <h4 class="tx-normal tx-roboto tx-white" th:text="'Bienvenido Admin, ' + ${username} ">Bienvenido, usuario</h4>
+
+            <p class="mg-b-25 tx-roboto tx-white">Uisrael - Desarrollo de software</p>
+            <p class="tx-20 wd-md-500 mg-md-l-auto mg-md-r-auto mg-b-25 tx-white">Dashboard General Veterinaria</p>
+        </div>
+    </div>
+    <div class="br-pagebody pd-x-20 pd-sm-x-30">
+        <div class="row row-sm">
+            
+            <div class="col-sm-6 col-xl-3  mg-xl-t-0 mb-2">
+                <div class="rounded overflow-hidden" style="background: #1e1e1ec2;">
+                    <div class="pd-20 d-flex align-items-center">
+                        <i class="fa fa-users tx-60 lh-0 tx-white "></i>
+                        <div class="mg-l-20">
+                            <p class="tx-12 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">
+                                TOTAL USUARIOS</p>
+                            <div class="row d-flex" style="justify-content: center;">
+                                <div class="col-6">
+                                    <p class="tx-40 tx-white tx-lato tx-bold mg-b-2 lh-1"><span th:text="${totalUsuarios}">0</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-xl-3 mg-xl-t-0 mb-2">
+                <div class="rounded overflow-hidden" style="background: #1e1e1ec2;">
+                    <div class="pd-20 d-flex align-items-center">
+                        <i class="fa fa-paw tx-60 lh-0 tx-white "></i>
+                        <div class="mg-l-20">
+                            <p class="tx-12 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">
+                                TOTAL MASCOTAS</p>
+                            <div class="row d-flex" style="justify-content: center;">
+                                <div class="col-6">
+                                    <p class="tx-40 tx-white tx-lato tx-bold mg-b-2 lh-1"><span th:text="${totalMascotas}">0</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-xl-3 mg-xl-t-0 mb-2">
+                <div class="rounded overflow-hidden" style="background: #1e1e1ec2;">
+                    <div class="pd-20 d-flex align-items-center">
+                        <i class="fa fa-briefcase tx-60 lh-0 tx-white "></i>
+                        <div class="mg-l-20">
+                            <p class="tx-12 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">
+                                TOTAL SERVICIOS
+                            </p>
+                            <div class="row d-flex" style="justify-content: center;">
+                                <div class="col-6">
+                                    <p class="tx-40 tx-white tx-lato tx-bold mg-b-2 lh-1"><span th:text="${totalServicios}">0</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-xl-3 mg-xl-t-0 mb-2">
+                <div class="rounded overflow-hidden" style="background: #1e1e1eed;">
+                    <div class="pd-20 d-flex align-items-center">
+                        <i class="fa fa-briefcase tx-60 lh-0 tx-white "></i>
+                        <div class="mg-l-20">
+                            <p class="tx-12 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">
+                                HISTORIAL CLINICO
+                            </p>
+                            <div class="row d-flex" style="justify-content: center;">
+                                <div class="col-6">
+                                    <p class="tx-40 tx-white tx-lato tx-bold mg-b-2 lh-1"><span th:text="${totalHistorialClinico}">0</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-xl-3 mg-xl-t-0 mb-2">
+                <div class="rounded overflow-hidden" style="background: #1d2939;">
+                    <div class="pd-20 d-flex align-items-center">
+                        <i class="fa fa-briefcase tx-60 lh-0 tx-white "></i>
+                        <div class="mg-l-20">
+                            <p class="tx-12 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">
+                                TOTAL CITAS
+                            </p>
+                            <div class="row d-flex" style="justify-content: center;">
+                                <div class="col-6">
+                                    <p class="tx-40 tx-white tx-lato tx-bold mg-b-2 lh-1"><span th:text="${totalCitas}">0</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-xl-3 mg-xl-t-0 mb-2">
+                <div class="rounded overflow-hidden" style="background: #ffb23fd9;">
+                    <div class="pd-20 d-flex align-items-center">
+                        <i class="icon ion-medkit tx-60 lh-0 tx-white "></i>
+                        <div class="mg-l-20">
+                            <p class="tx-12 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">
+                                CITAS PENDIENTES
+                            </p>
+                            <div class="row d-flex" style="justify-content: center;">
+                                <div class="col-6">
+                                    <p class="tx-40 tx-white tx-lato tx-bold mg-b-2 lh-1"><span th:text="${totalCitasPendientes}">0</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-xl-3 mg-xl-t-0 mb-2">
+                <div class="rounded overflow-hidden" style="background: #2ecc71bf;">
+                    <div class="pd-20 d-flex align-items-center">
+                        <i class="icon ion-medkit tx-60 lh-0 tx-white "></i>
+                        <div class="mg-l-20">
+                            <p class="tx-12 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">
+                                CITAS COMPLETAS
+                            </p>
+                            <div class="row d-flex" style="justify-content: center;">
+                                <div class="col-6">
+                                    <p class="tx-40 tx-white tx-lato tx-bold mg-b-2 lh-1"><span th:text="${totalCitasCompletadas}">0</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-xl-3 mg-xl-t-0 mb-2">
+                <div class="rounded overflow-hidden" style="background: #e74c3cbf;">
+                    <div class="pd-20 d-flex align-items-center">
+                        <i class="icon ion-medkit tx-60 lh-0 tx-white "></i>
+                        <div class="mg-l-20">
+                            <p class="tx-12 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">
+                                CITAS CANCELADAS
+                            </p>
+                            <div class="row d-flex" style="justify-content: center;">
+                                <div class="col-6">
+                                    <p class="tx-40 tx-white tx-lato tx-bold mg-b-2 lh-1"><span th:text="${totalCitasCanceladas}">0</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!--FIN DE CONTENIDO-->
+
+    <footer class="br-footer">
+        <div class="footer-left" style="color: white;">
+            <div class="mg-b-2">Copyright © 2024 Uisrael Sistema Veterinaria </div>
+            <div>Si lo puedes imaginar lo puedes crear</div>
+        </div>
+    </footer>
+</div>
+
+
+<script src="../../lib/jquery/jquery.js"></script>
+<script src="../../lib/popper.js/popper.js"></script>
+<script src="../../lib/bootstrap/bootstrap.js"></script>
+<script src="../../lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script>
+<script src="../../lib/moment/moment.js"></script>
+<script src="../../lib/jquery-ui/jquery-ui.js"></script>
+<script src="../../lib/jquery-switchbutton/jquery.switchButton.js"></script>
+<script src="../../lib/peity/jquery.peity.js"></script>
+<script src="../../js/bracket.js"></script>
+<script src="../../lib/morris.js/morris.js"></script>
+<script src="../../lib/highlightjs/highlight.pack.js"></script>
+</body>
+</html>

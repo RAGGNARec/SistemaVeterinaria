@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head th:replace="~{fragments/Head :: Head}"></head>
+<body>
+
+<div th:replace="~{fragments/Menu::Menu}"></div>
+<div th:replace="~{fragments/Header::Header}"></div>
+
+<!-- INICIO DE CONTENIDO -->
+<div class="br-mainpanel">
+    <!-- BARRA DE NAVEGACION -->
+    <div class="br-pageheader pd-y-5 pd-l-20">
+        <nav class="breadcrumb pd-0 mg-0 tx-12">
+            <a class="breadcrumb-item" th:href="@{/admin}">Inicio</a>
+            <span class="breadcrumb-item"></span> <!-- Separador -->
+            <a class="breadcrumb-item" th:href="@{/rol}">Listar rol</a>
+        </nav>
+    </div>
+    <!-- FIN DE BARRA DE NAVEGACION -->
+
+
+    <div class="br-pagebody mg-t-5 pd-x-30">
+        <div class="row row-sm mg-t-20">
+
+            <div class="col-md-12">
+                <!-- TABLA ROLES -->
+                <div class="br-section-wrapper p-3">
+                    <table class="table display responsive nowrap table-bordered" style="background: azure;">
+                        <thead class="thead-colored thead-dark">
+                        <tr>
+                            <th class="wd-5p">Tipo de roles</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="rol : ${listarRoles}">
+                            <td th:text="${rol.tipo}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FIN DE CONTENIDO -->
+    <div th:replace="~{fragments/Footer::Footer}"></div>
+</div>
+
+<script src="../../lib/jquery/jquery.js"></script>
+<script src="../../lib/popper.js/popper.js"></script>
+<script src="../../lib/bootstrap/bootstrap.js"></script>
+<script src="../../lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script>
+<script src="../../lib/moment/moment.js"></script>
+<script src="../../lib/jquery-ui/jquery-ui.js"></script>
+<script src="../../lib/jquery-switchbutton/jquery.switchButton.js"></script>
+<script src="../../lib/peity/jquery.peity.js"></script>
+<script src="../../js/bracket.js"></script>
+<script src="../../lib/morris.js/morris.js"></script>
+<script src="../../lib/highlightjs/highlight.pack.js"></script>
+</body>
+</html>
